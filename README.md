@@ -102,7 +102,6 @@ quantumleapcatalog-master/
 ├── LICENSE
 ├── qlcatalog.py
 ├── README.md
-├── README.md
 ├── secrets_of_g_client.json
 ```
 
