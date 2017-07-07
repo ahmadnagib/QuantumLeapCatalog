@@ -48,7 +48,7 @@ Kindly report any malfunctions by sending an email to [me](mailto:ahmadnagib@fci
 5. Run `vagrant ssh` command to access the VM.
 6. Move to 'catalog' folder containing the project files using `cd /vagrant/catalog`.
 7. Run the QL Catalog application using `python ql-catalog.py`. 
-8. This will make the Catalog available at [local host](localhost:5000)
+8. This will make the Catalog available at [local host](http://localhost:5000).
 
 
 The catalog app process running on the port can always be killed by using `fuser -k 5000/tcp` command.
