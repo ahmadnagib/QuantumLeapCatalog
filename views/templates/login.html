@@ -1,0 +1,95 @@
+<head>
+	<title>QL Catalog login</title>
+	<!-- script needed for google login -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"> </script>
+	<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+</head>
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<div class="flash">
+				{% with flashed_messages = get_flashed_messages()  %}
+					{% if flashed_messages %}
+						<ul>
+						{% for flashed_message in flashed_messages %}
+							<li><b>{{ flashed_message }}</b></li>
+						{% endfor %}
+						</ul>
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12 right_body">
+			<p class="section_title">Login Using your Favorite provider!</p>
+			<!-- Google+ login inspired from udacity lessons -->
+			<div id="gplus_signin_button" align="center">
+				<span class = "g-signin"
+				data-scope = "openid email"
+				data-clientid = "290197809205-6jjf0irkhj9k8lp7281u7coi1jqgob9r.apps.googleusercontent.com"
+				data-callback = "loginCallback"
+				data-approvalprompt = "force"
+				data-redirecturi = "postmessage"
+				data-accesstype = "offline"
+				data-cookiepolicy = "single_host_origin">
+				</span>
+			</div>
+
+			<div class="row">
+				<div class="col-3 right_body">
+				</div>
+
+				<!-- a division for displaying google+ auth result -->
+				<div id="authResult" class="col-7 right_body sign_in_image">
+
+				</div>
+
+				<div class="col-2 right_body">
+				</div>
+			</div>
+
+			<!-- Inspired from udacity lessons -->
+			<script>
+			function loginCallback(gplusAuthResponse) {
+			  if (gplusAuthResponse['code']) {
+
+			    // remove the button after coming back from google auth
+			    $('#gplus_signin_button').attr('style', 'display: none');
+
+			    // direct the one_time_code to the catalog server
+			    // show a welcome message and then redirect to catalog main page
+			    // if everything went fine at the catalog app server
+			    $.ajax({
+			      type: 'POST',
+			      url: '/gplus-auth?state={{SESSION_STATE}}',
+			      processData: false,
+			      data: gplusAuthResponse['code'],
+			      contentType: 'application/octet-stream; charset=utf-8',
+			      success: function(output) {
+
+			        // check the catalog server response and act accordingly
+			        if (output) {
+			          $('#authResult').html('You will be redirected to QL Catalog homepage in a few seconds' + output)
+			         setTimeout(function() {
+			          window.location.href = "/catalog";
+			         }, 5000);
+
+			      } else if (gplusAuthResponse['error']) {
+
+			  		  console.log('The following error has occurred while trying to authenticate using Google+ account' + gplusAuthResponse['error']);
+
+			  	  } else {
+			      	  $('#authResult').html('There was an error in authentication using your Google+ account, check the console for more info');
+			         }
+			    }});
+				} }
+			</script>
+		</div>
+	</div>
+
+
+{% endblock %}

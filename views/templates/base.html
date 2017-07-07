@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/static/main.css">
+	<title>QL Catalog</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+</head>
+<body>
+	<div class="grid">
+
+	    <header class="row">
+	      <div class="col-2 left_header">
+	      	{% if 'username' in session %}
+	        <a class="login_button" href="{{url_for('newItem')}}">Add Item</a>
+	        <br>
+	        <a class="login_button" href="{{url_for('newCategory')}}">Add Category</a>
+	 		{% endif %}
+	      </div>
+
+	      <div class="col-8">
+	      	<a href="/" class="site_title">QuantumLeap Catalog</a>
+	      </div>
+
+	      <div class="col-2 right_header">
+	        {% if 'username' in session %}
+			<a class="login_button" href="{{url_for('logout')}}">Logout</a>
+			{% else %}
+			<a class="login_button" href="{{url_for('getLoginPage')}}">Login</a>
+			{% endif %}
+	      </div>
+	    </header>
+
+		{% block content %}
+		{% endblock %}
+
+	</div>
+
+</body>
+</html>

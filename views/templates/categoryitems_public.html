@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<div class="flash">
+				{% with flashed_messages = get_flashed_messages()  %}
+					{% if flashed_messages %}
+						<ul>
+						{% for flashed_message in flashed_messages %}
+							<li><b>{{ flashed_message }}</b></li>
+						{% endfor %}
+						</ul>
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+
+	    <div class="col-5 left_body">
+	        <p class="section_title">Available Categories</p>
+	        <ul>
+		        {% for category in categories %}
+			        <li>
+						<a href={{url_for('categoryItems', category_id=category.id)}}>{{category.name}}</a>
+					</li>
+					<br>
+				{% endfor %}
+			</ul>
+	    </div>
+
+      <div class="col-7 right_body">
+      	<p class="section_title"><a href="{{url_for('getCategory', category_id=category.id)}}">{{category.name}}</a>({{items.count()}} items)</p>
+      	<ul>
+		        {% for item in items %}
+			        <li>
+						<a href={{url_for('getItem', category_id=item.category.id, item_id=item.id)}}>{{item.name}}</a>
+					</li>
+					<br>
+				{% endfor %}
+		</ul>
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<div class="flash">
+				{% with flashed_messages = get_flashed_messages()  %}
+					{% if flashed_messages %}
+						<ul>
+						{% for flashed_message in flashed_messages %}
+							<li><b>{{ flashed_message }}</b></li>
+						{% endfor %}
+						</ul>
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-1 right_body">
+
+		</div>
+
+		<div class="col-9 right_body">
+			<h1>{{item.name}}</h1>
+			<p><b>Category</b>: {{item.category.name}} </p>
+			<p><b>Description</b>: {{item.description}}</p>
+			<p><b>Created by</b>: {{item.user.name}}</p>
+			<p><b>JSON format link</b>: <a href="{{url_for('getItemJSON', category_id=item.category.id, item_id=item.id)}}">{{url_for('getItemJSON', category_id=item.category.id, item_id=item.id)}}</a></p>
+			<a href="{{ url_for('editItem', category_id=item.category_id, item_id=item.id)}}">Edit Item</a> |
+			<a href="{{ url_for('deleteItem', category_id=item.category_id, item_id=item.id)}}">Delete Item</a>
+			<br>
+			<br>
+		</div>
+
+		<div class="col-2 right_body">
+
+		</div>
+	</div>
+
+
+{% endblock %}
