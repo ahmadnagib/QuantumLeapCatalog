@@ -50,6 +50,7 @@ Kindly report any malfunctions by sending an email to [me](mailto:ahmadnagib@fci
 7. Run the QL Catalog application using `python ql-catalog.py`. 
 8. This will make the Catalog available at [local host](localhost:5000)
 
+
 The catalog app process running on the port can always be killed by using `fuser -k 5000/tcp` command.
 
 
