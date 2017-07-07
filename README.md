@@ -59,7 +59,7 @@ The catalog app process running on the port can always be killed by using `fuser
 Within the downloaded folder you will find the following files:
 
 ```
-quantumleap-master/
+quantumleapcatalog-master/
 ├──  models/
     ├── __init_.py
     ├── base.py
